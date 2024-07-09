@@ -56,3 +56,29 @@ font-family: "Pixelify Sans", sans-serif;
     box-shadow: none;
     opacity: 0.7;;
 }
+
+button{
+    width: 300px;
+    text-align: center;
+    background:radial-gradient(rgb(243, 121, 6),orange);
+    color: rgb(238, 238, 238);
+    -webkit-text-stroke: 1.5px black;
+    border-radius: 1em;
+    font-size: 45pt;
+    border: none;
+    margin-bottom: 5vh;
+    opacity: 0.9;
+    box-shadow: 0 0 30px 2px black;
+
+}
+
+.s3{
+    
+    display: flex;
+    justify-content: center;
+}
+
+.hidden{
+    display: none;
+}
+

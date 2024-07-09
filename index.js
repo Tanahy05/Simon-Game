@@ -3,6 +3,18 @@ let levelCounter=0;
 let playerCounter=0;
 let finished= false;
 
+addEventListener("resize",function(){
+    if(window.innerWidth<900){
+        document.querySelector(".title").style.height="10vh";
+        document.querySelector("button").classList.remove("hidden");
+        document.querySelector("h2").classList.add("hidden");
+    }
+    else{
+        document.querySelector("button").classList.add("hidden");
+        document.querySelector("h2").classList.remove("hidden");
+        document.querySelector(".title").style.height="30vh";
+    }
+});
 
 function buttons(){
     switch(this.classList[1]){
@@ -66,10 +78,17 @@ function resolveAfter2Seconds(x) {
       }, 1000);
     });
   }
-async function startDelay(){
-    var delay=await resolveAfter3seconds(10);
+
+
+async function delay(){
+    console.log("waiting");
+    var del= await resolveAfter3Seconds(10);
+    console.log("done waiting");
 }
+
+
 document.addEventListener("keypress",function(e){
+    console.log(e);
     if(e.key===" "){
         for(var i=0;i<4;i++){
             document.querySelectorAll(".grid-item")[i].addEventListener("click",buttons);}
@@ -81,8 +100,7 @@ document.addEventListener("keypress",function(e){
         document.querySelector("h1").style.color="orange";
         document.querySelector("h1").textContent="LEVEL "+ levelCounter;
         document.querySelector("h2").textContent="";
-        startDelay();
-        computer(levelCounter);
+        setTimeout(computer(levelCounter),500);
     }
 
 
@@ -132,6 +150,10 @@ async function checkGame(letter){
         finished=false;
         for(var i=0;i<4;i++){
             document.querySelectorAll(".grid-item")[i].removeEventListener("click",buttons);}
+            if(window.innerWidth<1000){
+                document.querySelector("button").classList.remove("clicked");
+                document.querySelector("button").classList.remove("hidden");
+            }
         
     }
     else if(playerCounter==(levelCounter-1)){
@@ -150,3 +172,18 @@ async function checkGame(letter){
     }
 
 }
+
+document.querySelector("button").addEventListener("click",function(){
+    document.querySelector("button").classList.add("clicked");
+    document.querySelector("button").classList.add("hidden");
+const event = new KeyboardEvent('keypress', {
+    key: ' ',
+    code: 'Space',
+    which: 32,
+    keyCode: 32,
+  });
+  
+  // dispatch the event on some DOM element
+  document.dispatchEvent(event);
+  delay();
+})
