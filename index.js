@@ -66,7 +66,9 @@ function resolveAfter2Seconds(x) {
       }, 1000);
     });
   }
-
+async function startDelay(){
+    var delay=await resolveAfter3seconds(10);
+}
 document.addEventListener("keypress",function(e){
     if(e.key===" "){
         for(var i=0;i<4;i++){
@@ -79,7 +81,8 @@ document.addEventListener("keypress",function(e){
         document.querySelector("h1").style.color="orange";
         document.querySelector("h1").textContent="LEVEL "+ levelCounter;
         document.querySelector("h2").textContent="";
-        setTimeout(computer(levelCounter),500);
+        startDelay();
+        computer(levelCounter);
     }
 
 
