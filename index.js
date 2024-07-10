@@ -86,6 +86,9 @@ function resolveAfter2Seconds(x) {
   }
 
 
+
+
+
 document.addEventListener("keypress",async function start(e){
     console.log(e);
     if(e.key===" "){
@@ -103,6 +106,8 @@ document.addEventListener("keypress",async function start(e){
         console.log(delay); 
         computer(levelCounter);
     }
+
+
 
 
 });
@@ -154,6 +159,9 @@ async function checkGame(letter){
             if(window.innerWidth<1000){
                 document.querySelector("button").classList.remove("clicked");
                 document.querySelector("button").classList.remove("hidden");
+            }
+            else{
+                document.querySelector("h2").classList.remove("hidden");
             }
             addEventListener("resize",resize);
         
