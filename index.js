@@ -3,7 +3,8 @@ let levelCounter=0;
 let playerCounter=0;
 let finished= false;
 
-addEventListener("resize",function(){
+
+function resize(){
     if(window.innerWidth<900){
         document.querySelector(".title").style.height="10vh";
         document.querySelector("button").classList.remove("hidden");
@@ -14,7 +15,12 @@ addEventListener("resize",function(){
         document.querySelector("h2").classList.remove("hidden");
         document.querySelector(".title").style.height="30vh";
     }
-});
+}
+
+resize();
+
+
+addEventListener("resize",resize);
 
 function buttons(){
     switch(this.classList[1]){
@@ -26,7 +32,7 @@ function buttons(){
             document.querySelector(".r").classList.add("clicked");
             setTimeout(()=>{
                 document.querySelector(".r").classList.remove("clicked");
-            },100);
+            },150);
             checkGame("r");
             break;
         case "y":
@@ -36,7 +42,7 @@ function buttons(){
             document.querySelector(".y").classList.add("clicked");
             setTimeout(()=>{
                 document.querySelector(".y").classList.remove("clicked");
-            },100);
+            },150);
             checkGame("y");
             break;
         case "g":
@@ -46,7 +52,7 @@ function buttons(){
             document.querySelector(".g").classList.add("clicked");
             setTimeout(()=>{
                 document.querySelector(".g").classList.remove("clicked");
-            },100);
+            },150);
             checkGame("g");
             break;
         case "b":
@@ -56,7 +62,7 @@ function buttons(){
             document.querySelector(".b").classList.add("clicked");
             setTimeout(()=>{
                 document.querySelector(".b").classList.remove("clicked");
-            },100);
+            },150);
             checkGame("b");
             break;
 
@@ -80,14 +86,7 @@ function resolveAfter2Seconds(x) {
   }
 
 
-async function delay(){
-    console.log("waiting");
-    var del= await resolveAfter3Seconds(10);
-    console.log("done waiting");
-}
-
-
-document.addEventListener("keypress",function(e){
+document.addEventListener("keypress",async function start(e){
     console.log(e);
     if(e.key===" "){
         for(var i=0;i<4;i++){
@@ -100,7 +99,9 @@ document.addEventListener("keypress",function(e){
         document.querySelector("h1").style.color="orange";
         document.querySelector("h1").textContent="LEVEL "+ levelCounter;
         document.querySelector("h2").textContent="";
-        setTimeout(computer(levelCounter),500);
+        var delay= await resolveAfter2Seconds(10);
+        console.log(delay); 
+        computer(levelCounter);
     }
 
 
@@ -154,6 +155,7 @@ async function checkGame(letter){
                 document.querySelector("button").classList.remove("clicked");
                 document.querySelector("button").classList.remove("hidden");
             }
+            addEventListener("resize",resize);
         
     }
     else if(playerCounter==(levelCounter-1)){
@@ -176,14 +178,15 @@ async function checkGame(letter){
 document.querySelector("button").addEventListener("click",function(){
     document.querySelector("button").classList.add("clicked");
     document.querySelector("button").classList.add("hidden");
-const event = new KeyboardEvent('keypress', {
+    const event = new KeyboardEvent('keypress', {
     key: ' ',
     code: 'Space',
     which: 32,
     keyCode: 32,
   });
   
-  // dispatch the event on some DOM element
+   // dispatch the event on some DOM element
   document.dispatchEvent(event);
-  delay();
+  removeEventListener("resize",resize);
+
 })
